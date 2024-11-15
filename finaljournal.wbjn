@@ -1,0 +1,45 @@
+﻿# encoding: utf-8
+# 2024 R1
+SetScriptVersion(Version="24.1.144")
+Open(FilePath="C:/Users/HP/Desktop/anys/transient temp.wbpj")
+Extensions.UnloadExtension(
+    Id="5e7e01a6-8601-11e8-9f8c-28f10e13ffe6",
+    Version="2022.2",
+    Format="Binary")
+Extensions.UnloadExtension(
+    Id="5f463412-bd3e-484b-87e7-cbc0a665e474",
+    Version="2024.1",
+    Format="Binary")
+Extensions.UnloadExtension(
+    Id="7b0e9e84-396d-4099-9602-2ced9dddc253",
+    Version="2024.1",
+    Format="Binary")
+Extensions.UnloadExtension(
+    Id="20180725-3f81-49eb-9f31-41364844c769",
+    Version="2024.1",
+    Format="Binary")
+Extensions.UnloadExtension(
+    Id="f3e3da52-fb02-4910-8cc9-980efd047bc6",
+    Version="2023.1",
+    Format="Binary")
+designPoint1 = Parameters.GetDesignPoint(Name="1")
+parameter1 = Parameters.GetParameter(Name="P2")
+designPoint1.SetParameterExpression(
+    Parameter=parameter1,
+    Expression="20005 [W m^-2]")
+parameter2 = Parameters.GetParameter(Name="P1")
+designPoint1.SetParameterExpression(
+    Parameter=parameter2,
+    Expression="10 [K]")
+designPoint2 = Parameters.GetDesignPoint(Name="2")
+designPoint2.SetParameterExpression(
+    Parameter=parameter2,
+    Expression="-250 [K]")
+designPoint2.SetParameterExpression(
+    Parameter=parameter1,
+    Expression="8000 [W m^-2]")
+designPoint1.SetParameterExpression(
+    Parameter=parameter1,
+    Expression="20000 [W m^-2]")
+backgroundSession1 = UpdateAllDesignPoints(DesignPoints=[designPoint1, designPoint2])
+Parameters.ExportAllDesignPointsData(FilePath="C:/Users/HP/Desktop/export.csv")
